@@ -1,2 +1,3 @@
-# 551Proj1
-COMP 551 project 1 (reddit comment popularity prediction)
+#551 Project 1
+
+pip install -r requirements.txt
