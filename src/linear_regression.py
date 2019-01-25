@@ -9,7 +9,7 @@ X, y = process_features(data, most_frequent_words)
 train_X, train_y, validate_X, validate_y, test_X, test_y = train_validate_test_split(X, y)
 
 def least_squares(X, y):
-    return np.linalg.lstsq(X, y, rcond=None)
+    return np.matmul(np.linalg.inv(np.matmul(X.transpose(), X)), np.matmul(X.transpose(), y))
 print(least_squares(train_X, train_y))
 
 
