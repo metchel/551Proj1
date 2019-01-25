@@ -32,24 +32,38 @@ def process_features(data, most_frequent_words):
 
     return np.array(X), np.array(y)
 
-def count_words(text, k):
+def apply_nltk_stuff(all_words):
     stop_words = set(stopwords.words("english"))
+    return [w for w in all_words if w.isalpha() and w not in stop_words]
+
+def count_words(text, k, apply_nltk_stuff=False):
+    if apply_nltk_stuff:
+        stop_words = set(stopwords.words("english"))
+    
     all_words = {}
     for string in text:
-        raw_words = word_tokenize(string)
-        words = [w.lower() for w in raw_words if w.isalpha() and w not in stop_words]
+        if apply_nltk_stuff:
+            raw_words = word_tokenize(string)
+            words = [w.lower() for w in raw_words if w.isalpha() and w not in stop_words]
+        else:
+            words = string.lower().split()
         for word in words:
             if word in all_words:
                 all_words[word] += 1
             else:
                 all_words[word] = 1
+
     top_k_words = sorted(all_words.items(), key=lambda t: t[1], reverse=True)[0:k]
     return [tup[0] for tup in top_k_words] 
 
-def process_text(string, most_frequent_words):
+def process_text(string, most_frequent_words, apply_nltk_stuff=False):
     word_counts = {}
     word_features = []
-    words = word_tokenize(string.lower())
+    if apply_nltk_stuff:
+        words = word_tokenize(string.lower())
+    else:
+        words = string.lower().split()
+    
     for word in words:
         if word in word_counts:
             word_counts[word] +=1
