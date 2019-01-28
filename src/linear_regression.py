@@ -11,7 +11,10 @@ train_X, train_y, validate_X, validate_y, test_X, test_y = train_validate_test_s
 def least_squares(X, y):
     return np.matmul(np.linalg.inv(np.matmul(X.transpose(), X)), np.matmul(X.transpose(), y))
 
-sgd(train_X, train_y)
-
+train_y = train_y.reshape(train_y.shape[0], 1)
+print(train_y.shape)
+weights = sgd(train_X, train_y)
+print(weights)
+print(least_squares(train_X, train_y))
 
 
