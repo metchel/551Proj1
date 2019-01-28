@@ -78,7 +78,7 @@ def sgd(data, y,  lr = 0.00001, target_lr = 0.000001, num_iter = 220, threshold 
             return weights
 
         
-def adam(data, y, lr = 0.5, target_lr = 0.05, num_iter = 130, rho = 0.93, momentDecay=0.999):
+def adam(data, y, lr = 0.5, target_lr = 0.05, num_iter = 130, threshold = 0.0000001, rho = 0.93, momentDecay=0.999):
     #num_iter is the ammount of iterations before lr is decayed to target_lr
     rows = data.shape[0]
     cols = data.shape[1]
